@@ -108,7 +108,7 @@ using namespace pros;
 		driveBackLeft = (leftY - rightX + leftX)/3;
 		driveBackRight = (leftY + rightX - leftX)/3;
 
-		//dividing each by two to make sure the values don't ever exceed 127
+		//dividing each by 3 to make sure the values don't ever exceed 127
 		//This isn't a huge issue normally since any values larger than 127 or smaller than -127 will be viewed as just the max/min,
 		//but we want the turns to stay proportional to each other side (I think? Idk what I'm talking about)
 		//This is largely based off of arcade drive code
