@@ -86,7 +86,7 @@ using namespace pros;
 	pros::Motor right_mtr(2); */
 
 	int forward;
-	int left, right;
+	int leftY, rightX, leftX;
 
 	Motor driveFrontLeft(MOTOR_FRONT_LEFT);
 	Motor driveFrontRight(MOTOR_FRONT_RIGHT, true);
@@ -99,13 +99,14 @@ using namespace pros;
 
 		//mecanum drive attempt w/ arcade drive mode
 
-		left = joystick.get_analog(ANALOG_LEFT_Y); //left joystick controls forward and backward motion
-		right = joystick.get_analog(ANALOG_RIGHT_X);//right joystick controls turning motion
+		leftY = joystick.get_analog(ANALOG_LEFT_Y); //left joystick controls forward and backward motion
+		rightX = joystick.get_analog(ANALOG_RIGHT_X);//right joystick controls turning motion
+		leftX = joystick.get_analog(ANALOG_LEFT_X);
 
-		driveFrontLeft = (left + right)/2; //these values likely won't work, and I should really probably look at mecanum code.
-		driveFrontRight = (left - right)/2;
-		driveBackLeft = (left - right)/2;
-		driveBackRight = (left + right)/2;
+		driveFrontLeft = (leftY + rightX + leftX)/3; //these values likely won't work, and I should really probably look at mecanum code.
+		driveFrontRight = (leftY - rightX - leftX)/3;
+		driveBackLeft = (leftY - rightX + leftX)/3;
+		driveBackRight = (leftY + rightX - leftX)/3;
 
 		//dividing each by two to make sure the values don't ever exceed 127
 		//This isn't a huge issue normally since any values larger than 127 or smaller than -127 will be viewed as just the max/min,
